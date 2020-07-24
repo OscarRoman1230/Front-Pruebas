@@ -1,0 +1,42 @@
+<header class="masthead text-white text-left" xmlns="http://www.w3.org/1999/html">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row ">
+      <div class="col-md-4 offset-md-4">
+        <div *ngIf="data.status === 2" class="alert alert-dismissible alert-warning">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <p class="mb-0">{{data.message}}</p>
+        </div>
+        <div *ngIf="message !== ''" class="alert alert-dismissible alert-warning">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <p class="mb-0">{{message}}</p>
+        </div>
+        <form method="post" class="card border-info p-3" (ngSubmit)="createUser()" required>
+          <h5 class="card-header text-white text-center">Registrarse</h5>
+          <div class="card-body">
+            <div class="form-group">
+              <label for="email">Correo Electronico:</label>
+              <input type="email" id="email" name="email" placeholder="example@correo.com"
+                     class="form-control" required [(ngModel)]="user.email">
+            </div>
+            <div class="form-group">
+              <label for="password">Contraseña:</label>
+              <input type="password" id="password" name="password" placeholder="Ingrese Contraseña"
+                     class="form-control" required [(ngModel)]="user.password">
+            </div>
+            <div class="form-group">
+              <label for="fullname">Nombre Completo:</label>
+              <input type="text" id="fullname" name="fullname" placeholder="Ingrese su nombre y apellido"
+                     class="form-control" required [(ngModel)]="user.fullname">
+            </div>
+            <div class="form-group text-center">
+              <button class="btn btn-outline-info btn-block btn-lg rounded-pill" type="submit">REGISTRARSE</button>
+              <hr>
+              <a class="text-info text-center" routerLink="/sign-in">INICIAR SESIÓN</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
