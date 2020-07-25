@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  URL_API: 'http://localhost:4000'
+  // URL_API: 'http://localhost:4000'
+  URL_API: 'https://pruebas-empresa-api.herokuapp.com'
 };
 
 /*
