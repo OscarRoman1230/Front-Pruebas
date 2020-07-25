@@ -9,9 +9,9 @@ app.listen(process.env.PORT || 8080);
 
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
+  app.use(express.static('front/build'));
 }
 
 app.get('*', (request, response) => {
-  response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  response.sendFile(path.join(__dirname, 'front/build', 'index.html'));
 });
