@@ -13,6 +13,10 @@ export class UsersService {
     return this.http.get(`${environment.URL_API}/api/users`);
   }
 
+  getUsersDisable() {
+    return this.http.get(`${environment.URL_API}/api/users/disable`);
+  }
+
   createUser(user) {
     return this.http.post(`${environment.URL_API}/api/auth/singup`, {
       email: user.email,
@@ -34,6 +38,12 @@ export class UsersService {
   disableUser(data) {
     return this.http.put(`${environment.URL_API}/api/users/disable/${data}`, {
       estado: 'inactivo'
+    });
+  }
+
+  enableUser(data) {
+    return this.http.put(`${environment.URL_API}/api/users/enable/${data}`, {
+      estado: 'activo'
     });
   }
 }

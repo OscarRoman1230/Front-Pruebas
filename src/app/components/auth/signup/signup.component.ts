@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../../services/users/users.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 export interface User {
   email: string;
@@ -23,7 +24,15 @@ export class SignupComponent implements OnInit {
   message = '';
   data: any = [];
 
-  constructor(private userService: UsersService, private router: Router) { }
+  constructor(
+    private userService: UsersService,
+    private router: Router,
+    private authService: AuthService
+  ) {
+    if (authService.loggedIn()) {
+      this.router.navigateByUrl('/list-users');
+    }
+  }
 
   ngOnInit(): void {
   }

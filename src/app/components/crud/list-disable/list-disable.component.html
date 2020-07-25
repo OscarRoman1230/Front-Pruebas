@@ -1,1 +1,50 @@
-<p>list-disable works!</p>
+<header class="masthead text-white text-left" xmlns="http://www.w3.org/1999/html">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row ">
+      <div class="col-md-12 offset-md-0">
+        <div class="card border-info bg-light">
+          <div class="card-body container">
+            <div class="form-group">
+              <div *ngIf="message !== ''" class="alert alert-dismissible alert-warning p-3 pb-3">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <p class="mb-0">{{message}}</p>
+              </div>
+              <div class="row justify-content-start">
+               <div class="col-4">
+                  <button class="btn btn-outline-success" routerLink="/list-users">
+                    Usuarios <i class="fas fa-external-link-alt"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <table *ngIf="dataCharger" class="table table-hover table-responsive-xl">
+              <thead>
+              <tr>
+                <th scope="col">Correo Electronico</th>
+                <th scope="col">Nombre y Apellido</th>
+                <th scope="col">Habilitar</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let user of usersDisable">
+                <td>{{user.email}}</td>
+                <td>{{user.fullname}}</td>
+                <td>
+                  <button class="btn btn-outline-info rounded-pill" (click)="enableUser(user.email)">
+                    <i class="fas fa-check"></i>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <div *ngIf="!dataCharger" class="spinner-border text-info text-center" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+

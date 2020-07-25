@@ -11,23 +11,23 @@
           <button type="button" class="close" data-dismiss="alert">&times;</button>
           <p class="mb-0">{{message}}</p>
         </div>
-        <form method="post" class="card border-info p-3" (ngSubmit)="createUser()" required>
+        <form method="post" class="card border-info p-3" (submit)="createUser()">
           <h5 class="card-header text-white text-center">Registrarse</h5>
           <div class="card-body">
             <div class="form-group">
               <label for="email">Correo Electronico:</label>
               <input type="email" id="email" name="email" placeholder="example@correo.com"
-                     class="form-control" required [(ngModel)]="user.email">
+                     class="form-control" required autofocus [(ngModel)]="user.email">
             </div>
             <div class="form-group">
               <label for="password">Contraseña:</label>
               <input type="password" id="password" name="password" placeholder="Ingrese Contraseña"
-                     class="form-control" required [(ngModel)]="user.password">
+                     class="form-control" required autofocus [(ngModel)]="user.password">
             </div>
             <div class="form-group">
               <label for="fullname">Nombre Completo:</label>
               <input type="text" id="fullname" name="fullname" placeholder="Ingrese su nombre y apellido"
-                     class="form-control" required [(ngModel)]="user.fullname">
+                     class="form-control" required autofocus [(ngModel)]="user.fullname">
             </div>
             <div class="form-group text-center">
               <button class="btn btn-outline-info btn-block btn-lg rounded-pill" type="submit">REGISTRARSE</button>

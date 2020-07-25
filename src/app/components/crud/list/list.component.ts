@@ -24,6 +24,7 @@ export class ListComponent implements OnInit {
   };
   userOnline: any = [];
   message = '';
+  dataCharger = true;
 
   constructor(private userService: UsersService, private authService: AuthService) {
     this.getUsers();
@@ -34,9 +35,11 @@ export class ListComponent implements OnInit {
   }
 
   getUsers() {
+    this.dataCharger = false;
     this.userService.getUsers().subscribe(
       res => {
         this.data = res;
+        this.dataCharger = true;
       },
       error => {
         console.log(error);

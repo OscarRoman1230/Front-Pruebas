@@ -15,11 +15,13 @@
                   <button class="btn btn-outline-info" data-toggle="modal" data-target="#newUser">Crear Usuario <i class="fas fa-user-plus"></i></button>
                 </div>
                 <div class="col-4">
-                  <button class="btn btn-outline-success">Usuarios Deshabilitado <i class="fas fa-external-link-alt"></i></button>
+                  <button class="btn btn-outline-success" routerLink="/list-users-disable">
+                    Usuarios Deshabilitado <i class="fas fa-external-link-alt"></i>
+                  </button>
                 </div>
               </div>
             </div>
-            <table class="table table-hover table-responsive-xl">
+            <table *ngIf="dataCharger" class="table table-hover table-responsive-xl">
               <thead>
               <tr>
                 <th scope="col">Correo Electronico</th>
@@ -42,6 +44,9 @@
               </tr>
               </tbody>
             </table>
+            <div *ngIf="!dataCharger" class="spinner-border text-info text-center" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
           </div>
         </div>
       </div>
@@ -50,7 +55,7 @@
 </header>
 
 <!-- Modal Crear Usuario-->
-<form (ngSubmit)="createUser()">
+<form (submit)="createUser()">
   <div class="modal fade" id="newUser" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -91,7 +96,7 @@
 </form>
 
 <!-- Modal Editar-->
-<form (ngSubmit)="updateUser()">
+<form (submit)="updateUser()">
   <div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">

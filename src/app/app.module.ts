@@ -12,6 +12,8 @@ import { ListComponent } from './components/crud/list/list.component';
 import { ListDisableComponent } from './components/crud/list-disable/list-disable.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 
+import { AuthGuard } from './guards/auth/auth.guard';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,9 @@ import { SignupComponent } from './components/auth/signup/signup.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

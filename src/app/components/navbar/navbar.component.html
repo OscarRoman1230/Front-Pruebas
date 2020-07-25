@@ -1,43 +1,61 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
   <div class="container">
-    <a *ngIf="!userLogeding" class="navbar-brand js-scroll-trigger" href="#"><img src="../../../assets/img/logo.png" alt="" loading="lazy"></a>
-    <a *ngIf="userLogeding" class="navbar-brand js-scroll-trigger" routerLink="/"><img src="../../../assets/img/logo.png" alt="" loading="lazy"></a>
+    <ng-container *ngIf="!authService.loggedIn(); else log">
+      <a class="navbar-brand js-scroll-trigger" href="#">
+        <img src="../../../assets/img/logo.png" alt="" loading="lazy">
+      </a>
+    </ng-container>
+    <ng-template #log>
+      <a class="navbar-brand js-scroll-trigger" routerLink="list-users">
+        <img src="../../../assets/img/logo.png" alt="" loading="lazy">
+      </a>
+    </ng-template>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       Menu
       <i class="fas fa-bars ml-1"></i>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav text-uppercase ml-auto">
-        <li class="nav-item">
-          <a *ngIf="!userLogeding" class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
-        </li>
-        <li *ngIf="!userLogeding" class="nav-item">
-          <a class="nav-link" href="#nosotros">Nosotros</a>
-        </li>
-        <li *ngIf="!userLogeding" class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Business</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#Finance">Finance</a>
-            <a class="dropdown-item" href="#Digital">Digital</a>
-            <a class="dropdown-item" href="#Recruiting">Recruiting</a>
-            <a class="dropdown-item" href="#theCircle">The Circle</a>
-          </div>
-        </li>
-        <li *ngIf="!userLogeding" class="nav-item">
-          <a class="nav-link" href="#news">News</a>
-        </li>
-        <li *ngIf="!userLogeding" class="nav-item">
-          <a class="nav-link" href="#contacto">Contacto</a>
-        </li>
-        <li *ngIf="!userLogeding" class="nav-item">
-          <button routerLink="sign-in" class="btn btn-block btn-md btn-outline-info rounded-pill"> ¡Iniciar Sesión!</button>
-        </li>
-        <li *ngIf="userLogeding" class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{userLogeding.fullname}}</a>
-          <div class="dropdown-menu">
-            <button class="dropdown-item" (click)="logout()">Cerrar Sesión</button>
-          </div>
-        </li>
+        <ng-container *ngIf="!authService.loggedIn(); else loggedIn">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#nosotros">Nosotros</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Business</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#Finance">Finance</a>
+              <a class="dropdown-item" href="#Digital">Digital</a>
+              <a class="dropdown-item" href="#Recruiting">Recruiting</a>
+              <a class="dropdown-item" href="#theCircle">The Circle</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#news">News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contacto">Contacto</a>
+          </li>
+          <li class="nav-item">
+            <button routerLink="sign-in" class="btn btn-block btn-md btn-outline-info rounded-pill"> ¡Iniciar Sesión!</button>
+          </li>
+        </ng-container>
+        <ng-template #loggedIn>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="list-users" routerLinkActive="active">Usuarios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="list-users-disable" routerLinkActive="active">Usuarios Deshabilitados</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{authService.getCurrentUser().fullname}}</a>
+            <div class="dropdown-menu">
+              <button class="dropdown-item" (click)="logout()">Cerrar Sesión</button>
+            </div>
+          </li>
+        </ng-template>
       </ul>
     </div>
   </div>

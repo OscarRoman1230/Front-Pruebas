@@ -31,6 +31,15 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  loggedIn() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   getCurrentUser() {
     // tslint:disable-next-line:variable-name
     const user_string = localStorage.getItem('userLoggeding');

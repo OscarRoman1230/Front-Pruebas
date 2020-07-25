@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { ListComponent } from '../../crud/list/list.component';
 
 @Component({
   selector: 'app-signin',
@@ -15,8 +16,7 @@ export class SigninComponent implements OnInit {
   data: any = [];
 
   constructor(private authService: AuthService, private router: Router) {
-    const user = authService.getCurrentUser();
-    if (user) {
+    if (authService.loggedIn()) {
       this.router.navigateByUrl('/list-users');
     } else {
       authService.logout();
@@ -32,9 +32,10 @@ export class SigninComponent implements OnInit {
         this.data = res;
         if (this.data.status === 1) {
           this.authService.setUserLoggedIn(res);
-          this.router.navigateByUrl('list-users', { skipLocationChange: true }).then(() => {
-            this.router.navigate(['/list-users']);
-          });
+          // this.router.navigateByUrl('/list-users', { skipLocationChange: true }).then(() => {
+          //   this.router.navigate(['/list-users']);
+          // });
+          this.router.navigate(['list-users']);
         } else {
           this.message = this.data.message;
         }

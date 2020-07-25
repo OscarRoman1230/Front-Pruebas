@@ -6,14 +6,18 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { SigninComponent } from './components/auth/signin/signin.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { ListComponent} from './components/crud/list/list.component';
+import { ListDisableComponent } from './components/crud/list-disable/list-disable.component';
+
+// TODO: Guards
+import {AuthGuard} from './guards/auth/auth.guard';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/landing-page', pathMatch: 'full'},
-  {path: 'landing-page', component: LandingPageComponent},
+  {path: '', component: LandingPageComponent},
   {path: 'sign-in', component: SigninComponent},
   {path: 'sign-up', component: SignupComponent},
-  {path: 'list-users', component: ListComponent}
+  {path: 'list-users', component: ListComponent, canActivate: [AuthGuard]},
+  {path: 'list-users-disable', component: ListDisableComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

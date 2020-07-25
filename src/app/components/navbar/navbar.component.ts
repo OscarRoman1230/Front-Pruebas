@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
 import * as $ from 'jquery';
 
 declare var jQuery: any;
@@ -10,49 +10,38 @@ declare var jQuery: any;
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, AfterViewInit {
 
-  userLogeding: any = [];
-
-  constructor(private  authService: AuthService, private router: Router) {}
+  constructor(public  authService: AuthService, private router: Router) {
+  }
 
   logout() {
     this.authService.logout();
     this.router.navigate(['/']);
   }
 
-
-
-  ngOnInit(): void {
-    this.userLogeding = this.authService.getCurrentUser();
-    // console.log(this.userLogeding);
-
-    /*!
-    * Start Bootstrap - Agency v6.0.2 (https://startbootstrap.com/template-overviews/agency)
-    * Copyright 2013-2020 Start Bootstrap
-    * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-agency/blob/master/LICENSE)
-    */
-    (function ($) {
-      "use strict"; // Start of use strict
+  ngAfterViewInit(): void {
+    (function($) {
+      'use strict'; // Start of use strict
 
       // Smooth scrolling using jQuery easing
-      $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () {
+      $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function() {
         if (
-          location.pathname.replace(/^\//, "") ==
-          this.pathname.replace(/^\//, "") &&
+          location.pathname.replace(/^\//, '') ==
+          this.pathname.replace(/^\//, '') &&
           location.hostname == this.hostname
         ) {
           var target = $(this.hash);
           target = target.length
             ? target
-            : $("[name=" + this.hash.slice(1) + "]");
+            : $('[name=' + this.hash.slice(1) + ']');
           if (target.length) {
-            $("html, body").animate(
+            $('html, body').animate(
               {
                 scrollTop: target.offset().top - 72,
               },
               1000,
-              "easeInOutExpo"
+              'easeInOutExpo'
             );
             return false;
           }
@@ -60,22 +49,22 @@ export class NavbarComponent implements OnInit {
       });
 
       // Closes responsive menu when a scroll trigger link is clicked
-      $(".js-scroll-trigger").click(function () {
-        $(".navbar-collapse").collapse("hide");
+      $('.js-scroll-trigger').click(function() {
+        $('.navbar-collapse').collapse('hide');
       });
 
       // Activate scrollspy to add active class to navbar items on scroll
-      $("body").scrollspy({
-        target: "#mainNav",
+      $('body').scrollspy({
+        target: '#mainNav',
         offset: 74,
       });
 
       // Collapse Navbar
-      var navbarCollapse = function () {
-        if ($("#mainNav").offset().top > 100) {
-          $("#mainNav").addClass("navbar-shrink");
+      var navbarCollapse = function() {
+        if ($('#mainNav').offset().top > 100) {
+          $('#mainNav').addClass('navbar-shrink');
         } else {
-          $("#mainNav").removeClass("navbar-shrink");
+          $('#mainNav').removeClass('navbar-shrink');
         }
       };
       // Collapse now if page is not at top
@@ -83,7 +72,8 @@ export class NavbarComponent implements OnInit {
       // Collapse the navbar when page is scrolled
       $(window).scroll(navbarCollapse);
     })(jQuery); // End of use strict
-
   }
+
+  ngOnInit(): void {}
 
 }
